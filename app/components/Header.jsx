@@ -15,6 +15,13 @@ function Header() {
   const router = useRouter();
 
   const db = getFirestore(app);
+  const onClickCreate =()=>{
+    if(session?.user){
+      router.push("/pin-builder");
+    }else{
+      signIn();
+    }
+  }
 
   useEffect(() => {
     saveUserInfo();
@@ -36,12 +43,16 @@ function Header() {
         alt="logo"
         width={50}
         height={50}
+        onClick={() => router.push("/")}
         className="hover:bg-cyan-100 p-2 rounded-full"
       />
       <button className="bg-black text-white rounded-3xl px-6 py-2 ">
         Home
       </button>
-      <button className="px-4 py-2 font-semibold border-b-4 border-white hover:border-cyan-900" onClick={()=> router.push("/pin-builder")}>
+      <button
+        className="px-4 py-2 font-semibold border-b-4 border-white hover:border-cyan-900"
+        onClick={() => onClickCreate()}
+      >
         Create
       </button>
       <div className="bg-gray-200 p-3 gap-3 rounded-3xl w-full hidden md:flex">
