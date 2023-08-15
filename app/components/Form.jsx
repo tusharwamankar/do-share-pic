@@ -16,7 +16,7 @@ function Form() {
 
   const storage = getStorage(app);
   const db = getFirestore(app);
-  const PostID = Date.now().toString();
+  const postID = Date.now().toString();
 
   const onSave = () => {
     console.log("title:", title, "desc:", desc, "link:", link);
@@ -41,10 +41,11 @@ function Form() {
             userName: session.user.name,
             email: session.user.email,
             userImage: session.user.image,
+            id: postID,
           };
-          await setDoc(doc(db, "doShare-post", PostID), postData).then(
+          await setDoc(doc(db, "doShare-post", postID), postData).then(
             (res) => {
-              console.log("Savedddddddddddddddddddddd");
+              console.log("saved bro");
             }
           );
         });
