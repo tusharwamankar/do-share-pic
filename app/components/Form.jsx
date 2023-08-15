@@ -6,6 +6,8 @@ import { useSession } from "next-auth/react";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import app from "../Shared/firebaseConfig";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 function Form() {
   const { data: session } = useSession();
@@ -13,7 +15,9 @@ function Form() {
   const [desc, setDesc] = useState();
   const [link, setLink] = useState();
   const [file, setFile] = useState();
+  const [loading, setLoading] = useState(false);
 
+  const router = useRouter();
   const storage = getStorage(app);
   const db = getFirestore(app);
   const postID = Date.now().toString();
@@ -21,6 +25,7 @@ function Form() {
   const onSave = () => {
     // console.log("title:", title, "desc:", desc, "link:", link);
     // console.log("file", file);
+    setLoading(true);
     uploadFile();
   };
 
@@ -46,6 +51,8 @@ function Form() {
           await setDoc(doc(db, "doShare-post", postID), postData).then(
             (res) => {
               // console.log("saved bro");
+              setLoading(true);
+              router.push("/" + session.user.email);
             }
           );
         });
@@ -53,40 +60,51 @@ function Form() {
   };
 
   return (
-    <div className="bg-white p-6 rounded-2xl">
+    <div className="bg-white max-w-5xl mx-auto p-6 rounded-2xl text-black">
       <div className="flex justify-end mb-6">
         <button
           onClick={() => onSave()}
-          className="bg-red-500 p-2 text-white font-semibold px-3 rounded-lg"
+          className="bg-gray-500 p-2 text-white font-semibold px-3 rounded-lg"
         >
-          Save
+          {loading ? (
+            <Image
+              src="/loading.png"
+              alt="loading"
+              width={30}
+              height={30}
+              className="animate-spin mx-auto"
+              priority
+            />
+          ) : (
+            <span>Save</span>
+          )}
         </button>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div className="flex flex-col justify-center gap-8 md:flex-row">
         <UploadImage setFile={(file) => setFile(file)} />
-        <div className="col-span-2">
-          <div className="w-[100%">
+        <div className="flex items-center">
+          <div className="w-[100%]">
             <input
               type="text"
               placeholder="Add a title"
               onChange={(e) => setTitle(e.target.value)}
-              className="text-[35px] outline-none font-bold w-full border-b-2 border-gray-400  placeholder-gray-400 "
+              className="text-2xl outline-none font-bold w-full border-b-2 border-gray-400  placeholder-gray-400 "
             />
-            <h2 className="text-[12px] w-full text-gray-400 ">
-              first 40 words{" "}
+            <h2 className="text-lg w-full text-gray-400 ">
+              few words{" "}
             </h2>
             <UserTag />
             <textarea
               type="text"
-              placeholder="what pin is about"
+              placeholder="Description"
               onChange={(e) => setDesc(e.target.value)}
-              className="outline-none w-full mt-8 pb-4 text-[14px] border-b-4 border-gray-400  placeholder-gray-400"
+              className="outline-none w-full mt-8 text-base border-b-2 border-gray-400  placeholder-gray-400"
             />
             <input
               type="text"
               placeholder="Add a Destination link"
               onChange={(e) => setLink(e.target.value)}
-              className="outline-none w-full pb-4 mt-[100px]  border-b-2 border-gray-400  placeholder-gray-400"
+              className="outline-none w-full pb-4 mt-10  border-b-2 border-gray-400  placeholder-gray-400"
             />
           </div>
         </div>

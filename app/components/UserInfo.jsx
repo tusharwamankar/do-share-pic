@@ -12,7 +12,7 @@ function UserInfo({ userInfo }) {
     router.push("/");
   };
   return (
-    <div className="flex flex-col justify-center items-center mb-10">
+    <div className="flex flex-col justify-center items-center mb-10 mx-auto">
       <Image
         src={userInfo.userImage}
         alt="userImage"

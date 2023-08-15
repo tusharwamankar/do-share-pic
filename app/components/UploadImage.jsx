@@ -5,7 +5,7 @@ function UploadImage({ setFile }) {
   const [selectedFile, setSelectedFile] = useState();
   return (
     <div className="h-[450px] bg-white/75 rounded-lg">
-      <label className="m-5 flex flex-col justify-center items-center cursor-pointer h-[90%] border-2 border-gray-300 border-dashed rounded-lg text-gray-600">
+      <label className="m-5 flex flex-col justify-center items-center cursor-pointer h-96 w-80 border-2 border-gray-300 border-dashed rounded-lg text-gray-600">
         {!selectedFile ? (
           <div className="flex flex-col items-center">
             <HiArrowUpCircle className="text-[22px]" />
