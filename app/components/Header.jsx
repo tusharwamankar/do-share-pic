@@ -15,13 +15,13 @@ function Header() {
   const router = useRouter();
 
   const db = getFirestore(app);
-  const onClickCreate =()=>{
-    if(session?.user){
+  const onClickCreate = () => {
+    if (session?.user) {
       router.push("/pin-builder");
-    }else{
+    } else {
       signIn();
     }
-  }
+  };
 
   useEffect(() => {
     saveUserInfo();
@@ -37,20 +37,23 @@ function Header() {
     }
   };
   return (
-    <div className="flex gap-5 p-6 items-center">
+    <div className="flex gap-5 p-6 items-center max-w-7xl mx-auto">
       <Image
-        src="/logo.png"
+        src="/logoo.png"
         alt="logo"
-        width={50}
-        height={50}
-        onClick={() => router.push("/")}
-        className="hover:bg-cyan-100 p-2 rounded-full"
+        width={70}
+        height={70}
+        className="cursor-pointer"
+        priority
       />
-      <button className="bg-black text-white rounded-3xl px-6 py-2 ">
+      <button
+        onClick={() => router.push("/")}
+        className="bg-cyan-500 text-black rounded-3xl font-bold my-4 border border-cyan-500 hover:border-cyan-500 hover:bg-transparent hover:text-white hover:cursor-pointer px-6 py-2 "
+      >
         Home
       </button>
       <button
-        className="px-4 py-2 font-semibold border-b-4 border-white hover:border-cyan-900"
+        className="px-4 py-2 font-semibold border-b-4 border-[#242424] hover:border-white duration-500"
         onClick={() => onClickCreate()}
       >
         Create
@@ -63,9 +66,9 @@ function Header() {
           className="bg-transparent  outline-none"
         />
       </div>
-      <AiOutlineSearch className="md:hidden hover:text-cyan-700 text-4xl cursor-pointer text-gray-600" />
-      <BsFillBellFill className="text-4xl hover:text-cyan-700 cursor-pointer text-gray-600 " />
-      <BsFillChatDotsFill className="text-4xl cursor-pointer hover:text-cyan-700 text-gray-600" />
+      <AiOutlineSearch className="md:hidden hover:text-cyan-700 text-4xl cursor-pointer text-cyan-500" />
+      <BsFillBellFill className="text-4xl hover:text-cyan-700 cursor-pointer text-cyan-500 " />
+      <BsFillChatDotsFill className="text-4xl cursor-pointer hover:text-cyan-700 text-cyan-500" />
       {session?.user ? (
         <Image
           src={session?.user?.image}
@@ -73,7 +76,8 @@ function Header() {
           alt="logo"
           width={60}
           height={60}
-          className="hover:bg-cyan-100 p-2 rounded-full"
+          className="rounded-full cursor-pointer p-2 hover:p-1 duration-500"
+          priority
         />
       ) : (
         <button

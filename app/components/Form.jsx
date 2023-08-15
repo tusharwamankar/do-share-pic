@@ -19,8 +19,8 @@ function Form() {
   const postID = Date.now().toString();
 
   const onSave = () => {
-    console.log("title:", title, "desc:", desc, "link:", link);
-    console.log("file", file);
+    // console.log("title:", title, "desc:", desc, "link:", link);
+    // console.log("file", file);
     uploadFile();
   };
 
@@ -28,11 +28,11 @@ function Form() {
     const storageRef = ref(storage, "doShare/" + file.name);
     uploadBytes(storageRef, file)
       .then((snapshot) => {
-        console.log("Uploaded a file");
+        // console.log("Uploaded a file");
       })
       .then((res) => {
         getDownloadURL(storageRef).then(async (url) => {
-          console.log(url);
+          // console.log(url);
           const postData = {
             title: title,
             desc: desc,
@@ -45,7 +45,7 @@ function Form() {
           };
           await setDoc(doc(db, "doShare-post", postID), postData).then(
             (res) => {
-              console.log("saved bro");
+              // console.log("saved bro");
             }
           );
         });

@@ -32,7 +32,7 @@ function Profile({ params }) {
     if (docSnap.exists()) {
       setUserInfo(docSnap.data());
     } else {
-      console.log("No such document!");
+      // console.log("No such document!");
     }
   };
   useEffect(() => {
@@ -50,7 +50,7 @@ function Profile({ params }) {
     );
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
+      // console.log(doc.id, " => ", doc.data());
       setlistOfPins((listOfPins) => [...listOfPins, doc.data()]);
     });
   };
