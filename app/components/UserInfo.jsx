@@ -24,7 +24,10 @@ function UserInfo({ userInfo }) {
       <h1 className="text-2xl font-semibold my-4">{userInfo.userName}</h1>
       <h2 className="text-gray-400 ">{userInfo.email}</h2>
       <div className="flex justify-between text-black">
-        <button className=" bg-cyan-500 px-6 py-2 rounded-3xl font-bold my-4 border border-cyan-500 hover:border-cyan-500 hover:bg-transparent hover:text-white hover:cursor-pointer mx-2 ">
+        <button
+          onClick={() => navigator.clipboard.writeText(session.user.email)}
+          className=" bg-cyan-500 px-6 py-2 rounded-3xl font-bold my-4 border border-cyan-500 hover:border-cyan-500 hover:bg-transparent hover:text-white hover:cursor-pointer mx-2 "
+        >
           Share
         </button>
         {session?.user.email == userInfo.email ? (

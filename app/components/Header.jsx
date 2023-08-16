@@ -37,7 +37,7 @@ function Header() {
     }
   };
   return (
-    <div className="flex gap-5 p-6 items-center max-w-7xl mx-auto text-black">
+    <div className="flex gap-5 p-6 items-center max-w-5xl md:max-w-7xl mx-auto text-black">
       <Image
         src="/logoo.png"
         alt="logo"
@@ -67,8 +67,8 @@ function Header() {
         />
       </div>
       <AiOutlineSearch className="md:hidden hover:text-cyan-700 text-4xl cursor-pointer text-cyan-500" />
-      <BsFillBellFill className="text-4xl hover:text-cyan-700 cursor-pointer text-cyan-500 hidden md:flex" />
-      <BsFillChatDotsFill className="text-4xl cursor-pointer hover:text-cyan-700 text-cyan-500 hidden md:flex" />
+      <BsFillBellFill className="text-4xl hover:text-cyan-700 cursor-pointer text-cyan-500 hidden lg:flex" />
+      <BsFillChatDotsFill className="text-4xl cursor-pointer hover:text-cyan-700 text-cyan-500 hidden lg:flex" />
       {session?.user ? (
         <Image
           src={session?.user?.image}
